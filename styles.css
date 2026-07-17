@@ -617,3 +617,65 @@ body { overflow-x: clip; }
   .feature-card,
   .package-lead { min-width: 0; }
 }
+
+html.gate-locked body > *:not(#gate-overlay) { display: none !important; }
+
+#gate-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #101311;
+  padding: 24px;
+}
+
+.gate-form {
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-align: center;
+}
+
+.gate-title {
+  font-family: var(--font-display, inherit);
+  font-size: 1.8rem;
+  letter-spacing: 0.04em;
+  color: #f7f4ee;
+  margin: 0;
+}
+
+.gate-sub {
+  color: #a9b2ac;
+  font-size: 0.9rem;
+  margin: 0 0 8px;
+}
+
+.gate-input {
+  padding: 12px 14px;
+  border-radius: 6px;
+  border: 1px solid #3a423d;
+  background: #1a1e1b;
+  color: #f7f4ee;
+  font-size: 1rem;
+}
+
+.gate-submit {
+  padding: 12px 14px;
+  border-radius: 6px;
+  border: none;
+  background: #42fcd1;
+  color: #101311;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.gate-error {
+  color: #fc5042;
+  font-size: 0.85rem;
+  margin: 0;
+}
