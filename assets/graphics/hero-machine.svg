@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">The Machine</title>
+  <desc id="desc">A dark arena-inspired illustration showing TKO connected to WWE, UFC, PBR, IMG, and On Location.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#07100e"/><stop offset=".58" stop-color="#121a18"/><stop offset="1" stop-color="#050706"/></linearGradient>
+    <radialGradient id="glow"><stop stop-color="#42FCD1" stop-opacity=".34"/><stop offset="1" stop-color="#42FCD1" stop-opacity="0"/></radialGradient>
+    <pattern id="grid" width="56" height="56" patternUnits="userSpaceOnUse"><path d="M56 0H0V56" fill="none" stroke="#dce7df" stroke-opacity=".07"/></pattern>
+    <filter id="shadow"><feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#000" flood-opacity=".75"/></filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#grid)"/>
+  <ellipse cx="800" cy="410" rx="560" ry="380" fill="url(#glow)" opacity=".45"/>
+  <g opacity=".24" stroke="#f7f4ec" stroke-width="3">
+    <path d="M120 90L580 640"/><path d="M360 40L710 650"/><path d="M1480 80L1040 650"/><path d="M1240 20L900 650"/>
+  </g>
+  <g filter="url(#shadow)">
+    <path d="M580 170L1020 170L1110 330L800 430L490 330Z" fill="#101614" stroke="#42FCD1" stroke-width="4"/>
+    <path d="M490 330L800 430V570L525 470Z" fill="#0b100f" stroke="#5F7D76" stroke-width="3"/>
+    <path d="M1110 330L800 430V570L1075 470Z" fill="#171d1b" stroke="#5F7D76" stroke-width="3"/>
+    <text x="800" y="327" text-anchor="middle" fill="#f7f4ec" font-family="Arial Black,Arial,sans-serif" font-size="162" font-style="italic" letter-spacing="-12">TKO</text>
+    <text x="800" y="365" text-anchor="middle" fill="#42FCD1" font-family="Arial,sans-serif" font-size="24" font-weight="700" letter-spacing="9">OPERATING SYSTEM</text>
+  </g>
+  <g font-family="Arial,sans-serif" font-weight="800" font-size="26" fill="#f7f4ec">
+    <g><rect x="155" y="218" width="230" height="76" rx="38" fill="#151b19" stroke="#FC5042" stroke-width="3"/><text x="270" y="266" text-anchor="middle">WWE</text></g>
+    <g><rect x="1215" y="218" width="230" height="76" rx="38" fill="#151b19" stroke="#FC9142" stroke-width="3"/><text x="1330" y="266" text-anchor="middle">UFC</text></g>
+    <g><rect x="95" y="445" width="230" height="76" rx="38" fill="#151b19" stroke="#7D6C5F" stroke-width="3"/><text x="210" y="493" text-anchor="middle">PBR</text></g>
+    <g><rect x="1275" y="445" width="230" height="76" rx="38" fill="#151b19" stroke="#5F7D76" stroke-width="3"/><text x="1390" y="493" text-anchor="middle">IMG</text></g>
+    <g><rect x="635" y="665" width="330" height="76" rx="38" fill="#151b19" stroke="#42FCD1" stroke-width="3"/><text x="800" y="713" text-anchor="middle">ON LOCATION</text></g>
+  </g>
+  <g fill="none" stroke="#42FCD1" stroke-width="3" opacity=".74">
+    <path d="M385 256C500 260 570 300 650 365"/><path d="M1215 256C1100 260 1030 300 950 365"/>
+    <path d="M325 483C495 500 595 505 705 470"/><path d="M1275 483C1105 500 1005 505 895 470"/>
+    <path d="M800 570V665"/>
+  </g>
+  <g fill="#42FCD1"><circle cx="650" cy="365" r="7"/><circle cx="950" cy="365" r="7"/><circle cx="705" cy="470" r="7"/><circle cx="895" cy="470" r="7"/><circle cx="800" cy="570" r="7"/></g>
+  <g transform="translate(260 630)" fill="none" stroke="#f7f4ec" stroke-width="8" opacity=".82">
+    <path d="M0 120L120 5H960L1080 120Z"/><path d="M120 5V120M960 5V120M0 120H1080"/>
+    <path d="M60 92H1020M84 64H996M106 37H974" stroke-width="3" opacity=".68"/>
+  </g>
+  <rect x="0" y="844" width="1600" height="56" fill="#42FCD1"/>
+  <text x="62" y="881" fill="#0c1210" font-family="Arial,sans-serif" font-size="22" font-weight="900" letter-spacing="6">POTENTIAL IS THE HYPOTHESIS. OBSERVED BEHAVIOR IS THE TEST.</text>
+</svg>
