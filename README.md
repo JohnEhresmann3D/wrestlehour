@@ -4,13 +4,17 @@ This package is a working, dependency-free, multi-page website—not a rendered 
 
 ## Run it
 
-Open `index.html` directly, or serve the folder locally:
+Open `index.html` directly, serve the folder statically, or run the minimal Node backend:
 
 ```bash
 python3 -m http.server 8080
+# or
+ADMIN_PASSWORD=local-admin-password SESSION_SECRET=local-dev-secret npm start
 ```
 
 Then visit `http://localhost:8080`.
+
+Admin login is available at `/admin` when using `npm start`. Set `ADMIN_PASSWORD` and `SESSION_SECRET` in the environment.
 
 ## Included
 
