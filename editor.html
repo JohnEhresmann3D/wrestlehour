@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en" class="gate-locked">
+<head>
+  <script src="gate.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101311">
+  <title>Article Editor Prototype — WrestleHour</title>
+  <link rel="icon" href="assets/ui/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="editor.css">
+  <script src="article-renderer.js" defer></script>
+  <script src="editor.js" defer></script>
+</head>
+<body>
+  <header class="editor-topbar">
+    <a class="editor-mark" href="index.html">WRESTLE<span>HOUR</span></a>
+    <div class="editor-topbar-actions">
+      <a class="ghost-button" href="articles/preview.html" target="_blank" rel="noopener">Open preview ↗</a>
+      <button class="primary-button" type="button" data-export>Export JSON</button>
+    </div>
+  </header>
+
+  <main class="editor-shell">
+    <section class="editor-hero">
+      <p class="eyebrow">Local prototype</p>
+      <h1>Article editor with approved templates.</h1>
+      <p>This editor saves to this browser only. It creates draft JSON and previews; it does not publish, schedule, upload media, or change homepage placement.</p>
+    </section>
+
+    <form class="editor-grid" data-editor-form>
+      <aside class="editor-panel editor-panel--sticky">
+        <h2>Template</h2>
+        <label for="template">Article template</label>
+        <select id="template" name="template">
+          <option value="feature-package">Feature / Package Essay</option>
+          <option value="standard-analysis">Standard Analysis</option>
+        </select>
+        <p class="hint" data-template-help>Feature supports hero art, TOC, rails, and wide/full graphics.</p>
+
+        <h2>Actions</h2>
+        <button class="primary-button full" type="submit">Save draft locally</button>
+        <button class="ghost-button full" type="button" data-reset>Reset to sample</button>
+        <label class="file-button full" for="import-json">Import JSON</label>
+        <input id="import-json" class="sr-only" type="file" accept="application/json" data-import>
+        <p class="save-state" data-save-state>Not saved yet.</p>
+      </aside>
+
+      <section class="editor-panel">
+        <h2>Metadata</h2>
+        <div class="field-grid">
+          <label>Title<input name="title" required></label>
+          <label>Slug<input name="slug" required pattern="[a-z0-9-]+"></label>
+          <label>Dek<textarea name="dek" rows="3"></textarea></label>
+          <label>Author<input name="author" required></label>
+          <label>Initials<input name="initials" maxlength="3"></label>
+          <label>Series<input name="series" placeholder="Under the Hood"></label>
+          <label>Package label<input name="packageLabel" placeholder="Part I"></label>
+          <label>Read time minutes<input name="readTimeMinutes" type="number" min="1" max="90"></label>
+          <label>Tags<input name="tags" placeholder="TKO, Strategy, Media rights"></label>
+        </div>
+      </section>
+
+      <section class="editor-panel">
+        <h2>Hero and rail</h2>
+        <div class="field-grid">
+          <label>Hero image path<input name="heroImage" placeholder="assets/graphics/hero-platform.svg"></label>
+          <label>Hero alt text<input name="heroAlt"></label>
+          <label>Rail title<input name="railTitle" placeholder="The thesis"></label>
+          <label>Rail body<textarea name="railBody" rows="3"></textarea></label>
+          <label class="check-row"><input name="tocEnabled" type="checkbox"> Enable TOC</label>
+        </div>
+      </section>
+
+      <section class="editor-panel editor-panel--wide">
+        <div class="block-toolbar">
+          <h2>Blocks</h2>
+          <div>
+            <button type="button" class="ghost-button" data-add-block="paragraph">Paragraph</button>
+            <button type="button" class="ghost-button" data-add-block="heading">Heading</button>
+            <button type="button" class="ghost-button" data-add-block="figure">Figure</button>
+            <button type="button" class="ghost-button" data-add-block="callout">Callout</button>
+            <button type="button" class="ghost-button" data-add-block="pullQuote">Quote</button>
+          </div>
+        </div>
+        <div class="validation" data-validation hidden></div>
+        <div class="blocks" data-blocks></div>
+      </section>
+    </form>
+  </main>
+</body>
+</html>
