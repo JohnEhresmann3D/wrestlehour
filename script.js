@@ -1,27 +1,40 @@
 (() => {
   const body = document.body;
+  const overlayOpeners = new WeakMap();
 
-  const openOverlay = (element) => {
+  const openOverlay = (element, opener = document.activeElement) => {
     if (!element) return;
+    if (opener instanceof HTMLElement) overlayOpeners.set(element, opener);
     element.classList.add('open');
     element.setAttribute('aria-hidden', 'false');
     body.classList.add('no-scroll');
     const focusable = element.querySelector('button, input, a[href]');
-    focusable?.focus();
+    setTimeout(() => {
+      if (element.classList.contains('open')) focusable?.focus();
+    }, 50);
   };
 
   const closeOverlay = (element) => {
     if (!element) return;
+    const wasOpen = element.classList.contains('open');
     element.classList.remove('open');
     element.setAttribute('aria-hidden', 'true');
     if (!document.querySelector('.drawer.open, .search-overlay.open, .lightbox.open')) {
       body.classList.remove('no-scroll');
     }
+    if (wasOpen) {
+      const opener = overlayOpeners.get(element);
+      overlayOpeners.delete(element);
+      setTimeout(() => opener?.focus(), 0);
+    }
   };
 
   const drawer = document.querySelector('.drawer');
   document.querySelectorAll('[data-open-drawer]').forEach((button) => {
-    button.addEventListener('click', () => openOverlay(drawer));
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      openOverlay(drawer, button);
+    });
   });
   drawer?.querySelectorAll('[data-close-drawer], .drawer-backdrop, .drawer-nav a').forEach((element) => {
     element.addEventListener('click', () => closeOverlay(drawer));
@@ -29,7 +42,10 @@
 
   const searchOverlay = document.querySelector('.search-overlay');
   document.querySelectorAll('[data-open-search]').forEach((button) => {
-    button.addEventListener('click', () => openOverlay(searchOverlay));
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      openOverlay(searchOverlay, button);
+    });
   });
   searchOverlay?.querySelectorAll('[data-close-search], .search-backdrop').forEach((element) => {
     element.addEventListener('click', () => closeOverlay(searchOverlay));
@@ -87,7 +103,7 @@
     lightboxImage.src = image.src;
     lightboxImage.alt = image.alt;
     if (lightboxTitle) lightboxTitle.textContent = title;
-    openOverlay(lightbox);
+    openOverlay(lightbox, card);
   };
   document.querySelectorAll('[data-lightbox]').forEach((card) => {
     card.addEventListener('click', () => openGraphic(card));
@@ -136,10 +152,35 @@
     window.addEventListener('resize', updateProgress);
   }
 
+  const tocDetails = document.querySelector('.article-toc-details');
+  const tocSummary = document.querySelector('.article-toc-summary');
+  const tocCurrent = document.querySelector('.toc-current');
+  const closeMobileToc = () => {
+    if (tocDetails && window.matchMedia('(max-width: 900px)').matches) tocDetails.open = false;
+  };
+  if (tocDetails && tocSummary) {
+    const syncTocExpanded = () => tocSummary.setAttribute('aria-expanded', tocDetails.open ? 'true' : 'false');
+    const syncTocDefault = () => {
+      tocDetails.open = !window.matchMedia('(max-width: 900px)').matches;
+      syncTocExpanded();
+    };
+    syncTocDefault();
+    tocDetails.addEventListener('toggle', syncTocExpanded);
+    window.addEventListener('resize', syncTocDefault);
+    tocDetails.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape') return;
+      closeMobileToc();
+      tocSummary.focus();
+    });
+  }
+
   const tocLinks = [...document.querySelectorAll('.article-toc a[href^="#"]')];
   const sections = tocLinks
     .map((link) => document.querySelector(link.getAttribute('href')))
     .filter(Boolean);
+  tocLinks.forEach((link) => {
+    link.addEventListener('click', () => window.setTimeout(closeMobileToc, 0));
+  });
   if (tocLinks.length && sections.length && 'IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => {
       const visible = entries
@@ -147,7 +188,14 @@
         .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
       if (!visible) return;
       tocLinks.forEach((link) => {
-        link.classList.toggle('active', link.getAttribute('href') === `#${visible.target.id}`);
+        const isActive = link.getAttribute('href') === `#${visible.target.id}`;
+        link.classList.toggle('active', isActive);
+        if (isActive) {
+          link.setAttribute('aria-current', 'location');
+          if (tocCurrent) tocCurrent.textContent = link.textContent.trim();
+        } else {
+          link.removeAttribute('aria-current');
+        }
       });
     }, { rootMargin: '-18% 0px -68% 0px', threshold: 0 });
     sections.forEach((section) => observer.observe(section));
