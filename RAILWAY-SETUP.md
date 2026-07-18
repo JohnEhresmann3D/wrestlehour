@@ -49,7 +49,7 @@ BASIC_PREVIEW_PASSWORD=BayBay
 PUBLIC_SITE_URL=https://www.wrestlehour.com
 ```
 
-`ADMIN_PASSWORD` should be separate from the public preview/password gate. If `ADMIN_PASSWORD` is missing, `/admin` login is disabled.
+`ADMIN_PASSWORD` is intentionally separate from the public preview/password gate. If `ADMIN_PASSWORD` is missing, `/admin` login is disabled.
 
 ## Next backend steps
 

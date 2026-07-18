@@ -9,7 +9,7 @@ const ROOT = __dirname;
 const SESSION_COOKIE = 'wh_admin_session';
 const SESSION_TTL_SECONDS = 60 * 60 * 8;
 const SESSION_SECRET = process.env.SESSION_SECRET || process.env.ADMIN_SESSION_SECRET || 'dev-session-secret-change-me';
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || process.env.BASIC_PREVIEW_PASSWORD || '';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
 const MIME_TYPES = {
